@@ -10,14 +10,16 @@ defmodule Core.PricingTest do
     event_name: "TEDx",
     expiration_datetime: "2018-09-15T15:53:00",
     is_active: true,
-    radius: 200
+    radius: 200,
+    amount: 123
   }
 
   @invalid_attrs %{
     event_name: nil,
     expiration_datetime: nil,
     is_active: nil,
-    radius: nil
+    radius: nil,
+    amount: nil
   }
 
   describe "create_promo_code" do
@@ -27,6 +29,7 @@ defmodule Core.PricingTest do
       assert promo_code.expiration_datetime == ~N[2018-09-15 15:53:00]
       assert promo_code.is_active
       assert promo_code.radius == 200
+      assert promo_code.amount == %Money{amount: 123, currency: :UGX}
     end
 
     test "create_promo_code/1 with invalid data returns error changeset" do
@@ -61,23 +64,20 @@ defmodule Core.PricingTest do
     end
 
     test "with filtering active promo codes lists only active promo codes" do
-      active_event =
-        :promo_code
-        |> build(is_active: true, event_name: "Active")
-        |> not_expired()
-        |> insert()
+      :promo_code
+      |> build(is_active: true, event_name: "Active")
+      |> not_expired()
+      |> insert()
 
-      not_active_event =
-        :promo_code
-        |> build(is_active: false, event_name: "Not active")
-        |> not_expired()
-        |> insert()
+      :promo_code
+      |> build(is_active: false, event_name: "Not active")
+      |> not_expired()
+      |> insert()
 
-      expired_event =
-        :promo_code
-        |> build(is_active: true, event_name: "Expired event")
-        |> expired()
-        |> insert()
+      :promo_code
+      |> build(is_active: true, event_name: "Expired event")
+      |> expired()
+      |> insert()
 
       assert [
                %PromoCode{

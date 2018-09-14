@@ -14,4 +14,12 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :money,
+  default_currency: :UGX,
+  separator: ".",
+  delimeter: ",",
+  symbol: false,
+  symbol_on_right: false,
+  symbol_space: false
+
 import_config "#{Mix.env()}.exs"

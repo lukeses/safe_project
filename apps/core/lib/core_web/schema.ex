@@ -45,6 +45,7 @@ defmodule CoreWeb.Schema do
       arg(:expiration_datetime, non_null(:naive_datetime))
       arg(:is_active, :boolean)
       arg(:radius, non_null(:integer))
+      arg(:amount, non_null(:integer))
 
       resolve(&CoreWeb.Resolvers.PromoCodeResolver.create_promo_code/2)
     end

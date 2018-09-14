@@ -8,7 +8,8 @@ defmodule CoreWeb.Factory do
       event_name: "TEDx",
       expiration_datetime: "2018-09-15T15:53:00",
       is_active: true,
-      radius: 200
+      radius: 200,
+      amount: 123
     }
   end
 

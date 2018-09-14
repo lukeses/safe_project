@@ -43,7 +43,8 @@ defmodule Core.Mixfile do
       {:ecto, "~> 2.2.6"},
       {:postgrex, "0.13.3"},
       {:phoenix, "1.3.0"},
-      {:ex_machina, "~> 2.2", only: :test}
+      {:ex_machina, "~> 2.2", only: :test},
+      {:money, "~> 1.2.1"}
     ]
   end
 

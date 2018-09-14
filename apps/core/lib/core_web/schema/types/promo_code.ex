@@ -16,5 +16,8 @@ defmodule CoreWeb.Schema.Types.PromoCode do
 
     @desc "An radius in meters that limits promo code operation"
     field(:radius, :boolean)
+
+    @desc "Promo code value - descreses about that number price of riding"
+    field(:amount, :integer)
   end
 end
