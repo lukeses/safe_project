@@ -1,6 +1,8 @@
 defmodule CoreWeb.Schema do
   use Absinthe.Schema
   import_types(CoreWeb.Schema.Types.User)
+  import_types(CoreWeb.Schema.Types.PromoCode)
+  import_types Absinthe.Type.Custom
 
   query do
     field :users, list_of(:user) do
@@ -29,6 +31,16 @@ defmodule CoreWeb.Schema do
       arg(:second_name, non_null(:string))
 
       resolve(&CoreWeb.Resolvers.UserResolver.update/2)
+    end
+
+    @desc "Create a promo code"
+    field :create_promo_code, type: :promo_code do
+      arg(:event_name, non_null(:string))
+      arg(:expiration_datetime, non_null(:naive_datetime))
+      arg(:is_active, :boolean)
+      arg(:radius, non_null(:integer))
+
+      resolve(&CoreWeb.Resolvers.PromoCodeResolver.create_promo_code/2)
     end
   end
 end
