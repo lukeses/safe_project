@@ -1,6 +1,8 @@
 defmodule Core.PricingTest do
   use Core.DataCase
 
+  import CoreWeb.Factory
+
   alias Core.Pricing
   alias Core.Pricing.PromoCode
 
@@ -25,6 +27,18 @@ defmodule Core.PricingTest do
       assert promo_code.expiration_datetime == ~N[2018-09-15 15:53:00]
       assert promo_code.is_active
       assert promo_code.radius == 200
+    end
+
+    test "create_promo_code/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Pricing.create_promo_code(@invalid_attrs)
+    end
+  end
+
+  describe "deactivate_promo_code" do
+    test "deactivate_promo_code/1 deactivates a promo code" do
+      promo_code = insert(:promo_code)
+      assert {:ok, %PromoCode{} = promo_code} = Pricing.deactivate_promo_code(promo_code.id)
+      refute promo_code.is_active
     end
 
     test "create_promo_code/1 with invalid data returns error changeset" do

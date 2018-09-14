@@ -42,5 +42,12 @@ defmodule CoreWeb.Schema do
 
       resolve(&CoreWeb.Resolvers.PromoCodeResolver.create_promo_code/2)
     end
+
+    @desc "Deactivate a promo code"
+    field :deactivate_promo_code, type: :promo_code do
+      arg(:id, non_null(:id))
+
+      resolve(&CoreWeb.Resolvers.PromoCodeResolver.deactivate_promo_code/2)
+    end
   end
 end

@@ -42,7 +42,8 @@ defmodule Core.Mixfile do
       {:poison, "~> 3.0", override: true},
       {:ecto, "~> 2.2.6"},
       {:postgrex, "0.13.3"},
-      {:phoenix, "1.3.0"}
+      {:phoenix, "1.3.0"},
+      {:ex_machina, "~> 2.2", only: :test}
     ]
   end
 

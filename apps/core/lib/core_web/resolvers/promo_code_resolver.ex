@@ -7,7 +7,7 @@ defmodule CoreWeb.Resolvers.PromoCodeResolver do
     Core.Pricing.create_promo_code(args)
   end
 
-  def get(%{id: id} = _args, _info) do
-    {:ok, Core.Pricing.get_promo_code!(id)}
+  def deactivate_promo_code(%{id: id}, _info) do
+    Core.Pricing.deactivate_promo_code(id)
   end
 end
