@@ -2,7 +2,7 @@ defmodule CoreWeb.Schema do
   use Absinthe.Schema
   import_types(CoreWeb.Schema.Types.User)
   import_types(CoreWeb.Schema.Types.PromoCode)
-  import_types Absinthe.Type.Custom
+  import_types(Absinthe.Type.Custom)
 
   query do
     field :users, list_of(:user) do
