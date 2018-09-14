@@ -45,4 +45,19 @@ defmodule Core.PricingTest do
       assert {:error, %Ecto.Changeset{}} = Pricing.create_promo_code(@invalid_attrs)
     end
   end
+
+  describe "list_promo_codes" do
+    test "deactivate_promo_code/1 deactivates a promo code" do
+      insert(:promo_code)
+
+      assert [
+               %PromoCode{
+                 event_name: "TEDx",
+                 expiration_datetime: ~N[2018-09-15 15:53:00.000000],
+                 is_active: true,
+                 radius: 200
+               }
+             ] = Pricing.list_promo_codes()
+    end
+  end
 end

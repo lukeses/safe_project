@@ -13,6 +13,10 @@ defmodule CoreWeb.Schema do
       arg(:id, non_null(:id))
       resolve(&CoreWeb.Resolvers.UserResolver.get/2)
     end
+
+    field :promo_codes, list_of(:promo_code) do
+      resolve(&CoreWeb.Resolvers.PromoCodeResolver.list_promo_codes/2)
+    end
   end
 
   mutation do

@@ -1,5 +1,5 @@
 defmodule CoreWeb.Resolvers.PromoCodeResolver do
-  def list_promo_code(_args, _info) do
+  def list_promo_codes(_args, _info) do
     {:ok, Core.Pricing.list_promo_codes()}
   end
 

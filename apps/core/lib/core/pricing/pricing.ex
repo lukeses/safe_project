@@ -17,7 +17,7 @@ defmodule Core.Pricing do
   end
 
   def deactivate_promo_code(id) do
-    with promo_code <- get_promo_code(id),
+    with %PromoCode{} = promo_code <- get_promo_code(id),
          changeset <- PromoCode.changeset(promo_code, %{is_active: false}) do
       Repo.update(changeset)
     else
