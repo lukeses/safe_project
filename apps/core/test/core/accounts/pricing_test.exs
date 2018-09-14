@@ -59,5 +59,33 @@ defmodule Core.PricingTest do
                }
              ] = Pricing.list_promo_codes()
     end
+
+    test "with filtering active promo codes lists only active promo codes" do
+      active_event =
+        :promo_code
+        |> build(is_active: true, event_name: "Active")
+        |> not_expired()
+        |> insert()
+
+      not_active_event =
+        :promo_code
+        |> build(is_active: false, event_name: "Not active")
+        |> not_expired()
+        |> insert()
+
+      expired_event =
+        :promo_code
+        |> build(is_active: true, event_name: "Expired event")
+        |> expired()
+        |> insert()
+
+      assert [
+               %PromoCode{
+                 event_name: "Active",
+                 is_active: true,
+                 radius: 200
+               }
+             ] = Pricing.list_promo_codes(%{filter: %{is_active: true}})
+    end
   end
 end

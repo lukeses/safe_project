@@ -11,4 +11,12 @@ defmodule CoreWeb.Factory do
       radius: 200
     }
   end
+
+  def not_expired(promo_code) do
+    %{promo_code | expiration_datetime: NaiveDateTime.utc_now() |> NaiveDateTime.add(1000)}
+  end
+
+  def expired(promo_code) do
+    %{promo_code | expiration_datetime: NaiveDateTime.utc_now() |> NaiveDateTime.add(-1000)}
+  end
 end

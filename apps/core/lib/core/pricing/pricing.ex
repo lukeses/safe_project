@@ -2,10 +2,17 @@ defmodule Core.Pricing do
   import Ecto.Query, warn: false
   alias Core.Repo
 
-  alias Core.Pricing.PromoCode
+  alias Core.Pricing.{PromoCode, PromoCodeQueries}
 
   def list_promo_codes do
     Repo.all(PromoCode)
+  end
+
+  def list_promo_codes(%{filter: %{is_active: true}}) do
+    PromoCode
+    |> PromoCodeQueries.is_active_query()
+    |> PromoCodeQueries.not_expired()
+    |> Repo.all()
   end
 
   def get_promo_code(id), do: Repo.get(PromoCode, id)

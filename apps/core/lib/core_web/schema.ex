@@ -15,7 +15,9 @@ defmodule CoreWeb.Schema do
     end
 
     field :promo_codes, list_of(:promo_code) do
-      resolve(&CoreWeb.Resolvers.PromoCodeResolver.list_promo_codes/2)
+      arg(:is_active, :boolean)
+
+      resolve(&CoreWeb.Resolvers.PromoCodeResolver.list_promo_codes/3)
     end
   end
 
